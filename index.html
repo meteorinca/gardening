@@ -3,33 +3,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description"
-        content="A concise guide to vegetable gardening for engineers.">
+  <meta name="description" content="Vegetable Gardening for Engineers — a starting point for understanding how to grow vegetables at home using hydroponics and container gardening.">
   <title>Vegetable Gardening for Engineers</title>
   <style>
     :root {
-      color-scheme: light dark;
-      --bg: #f7f8f3;
-      --surface: #fff;
-      --text: #243127;
-      --muted: #58675c;
-      --accent: #27633e;
-      --border: #dce3d8;
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --muted: #595959;
+      --accent: #1f5c3a;
+      --border: #e5e7eb;
+      --subtle: #f8f9fa;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 1.5rem;
+    }
 
     body {
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font: 17px/1.7 system-ui, sans-serif;
+      font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
     main, footer {
-      width: min(100% - 2.5rem, 850px);
-      margin: auto;
+      width: min(100% - 2.5rem, 780px);
+      margin: 0 auto;
     }
 
     header {
@@ -37,274 +40,981 @@
       border-bottom: 1px solid var(--border);
     }
 
-    h1, h2, h3 { line-height: 1.2; }
-    h1 { font-size: clamp(2rem, 6vw, 3.5rem); margin: .5rem 0 1rem; }
-    h2 { margin-top: 0; }
-    a { color: var(--accent); text-underline-offset: .2em; }
-    a:hover { text-decoration-thickness: 2px; }
-    .muted, small { color: var(--muted); }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .6rem 1.2rem;
-      padding: 1.5rem 0;
+    h1 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 0 1rem;
     }
 
-    section {
-      margin: 1rem 0 1.5rem;
-      padding: 1.75rem;
-      background: var(--surface);
+    h2 {
+      font-size: 1.55rem;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      margin: 3rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      line-height: 1.3;
+      margin: 2rem 0 0.75rem;
+    }
+
+    h4 {
+      font-size: 1rem;
+      line-height: 1.35;
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    p {
+      margin: 0 0 1rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+      text-decoration-thickness: 1px;
+    }
+
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .muted, small {
+      color: var(--muted);
+    }
+
+    nav.toc {
+      margin: 2rem 0;
+      padding: 1.25rem 1.5rem;
+      background: var(--subtle);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 8px;
     }
 
-    li + li { margin-top: .45rem; }
-    .table-wrap { overflow-x: auto; }
+    nav.toc h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin: 0 0 0.75rem;
+      padding: 0;
+      border: 0;
+    }
+
+    nav.toc ul {
+      margin: 0.5rem 0;
+      padding-left: 1.25rem;
+    }
+
+    nav.toc li {
+      margin: 0.25rem 0;
+    }
+
+    ul, ol {
+      margin: 0 0 1rem;
+      padding-left: 1.4rem;
+    }
+
+    li + li {
+      margin-top: 0.35rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.25rem 0;
+    }
 
     table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: .95rem;
+      font-size: 0.94rem;
     }
 
     th, td {
-      padding: .75rem;
+      padding: 0.65rem 0.75rem;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
     }
 
-    label { display: block; margin-top: 1rem; }
-    input, button {
+    thead th {
+      font-weight: 600;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .table-note {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: -0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    figure {
+      margin: 1.75rem 0;
+      padding: 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    figure img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    figcaption {
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .callout {
+      margin: 1.25rem 0;
+      padding: 1rem 1.25rem;
+      background: var(--subtle);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout p:last-child,
+    .callout ul:last-child {
+      margin-bottom: 0;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9em;
+      background: var(--subtle);
+      padding: 0.15em 0.35em;
+      border-radius: 4px;
+    }
+
+    .dli-calc {
+      margin: 1.5rem 0;
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--subtle);
+    }
+
+    .dli-calc h4 {
+      margin-top: 0;
+    }
+
+    .dli-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+
+    .dli-fields label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .dli-fields input {
       font: inherit;
-      padding: .65rem .8rem;
+      color: var(--text);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 6px;
+      padding: 0.5rem 0.65rem;
+      width: 170px;
     }
 
-    input {
-      width: 100%;
-      max-width: 320px;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    button {
-      display: block;
-      margin-top: 1rem;
+    .dli-fields button {
+      font: inherit;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
       background: var(--accent);
-      color: var(--surface);
+      color: #ffffff;
       cursor: pointer;
     }
 
-    :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
-    output { display: block; margin-top: 1rem; font-weight: 650; }
-    footer { padding: 1rem 0 3rem; font-size: .9rem; }
+    .dli-fields button:hover {
+      opacity: 0.92;
+    }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #151c17;
-        --surface: #1d2820;
-        --text: #e5eee6;
-        --muted: #b0c0b2;
-        --accent: #99d5a9;
-        --border: #36483b;
-      }
+    output {
+      display: block;
+      margin-top: 0.85rem;
+      font-weight: 600;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding: 2rem 0 3.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--muted);
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
     }
 
-    @media (max-width: 500px) {
-      section { padding: 1.2rem; }
-      th, td { padding: .6rem .4rem; }
+    @media (max-width: 520px) {
+      header { padding-top: 2.5rem; }
+      th, td { padding: 0.5rem 0.4rem; }
+      figure { padding: 0.65rem; }
     }
   </style>
 </head>
 <body>
   <main>
     <header>
-      <p class="muted">A practical growing reference</p>
       <h1>Vegetable Gardening for Engineers</h1>
-      <p>
-        Think of your garden as a system: understand the inputs,
-        measure the constraints, and improve one variable at a time.
-      </p>
-      <p class="muted">
-        A condensed adaptation of
-        <a href="https://jrcpl.us/contrib/2020/gardening-for-engineers/">
-          John Chang’s original guide
-        </a>,
-        focused on containers and hydroponics.
+      <p class="lead">
+        This is a starting point for understanding how to grow vegetables at home.
+        Hydroponics and container gardening are covered.
       </p>
     </header>
 
-    <nav aria-label="Contents">
-      <a href="#concepts">Concepts</a>
-      <a href="#growth">Growth stages</a>
-      <a href="#light">Light calculator</a>
-      <a href="#systems">Growing systems</a>
-      <a href="#data">Crop data</a>
+    <nav class="toc" aria-label="Table of Contents">
+      <h2>Table of Contents</h2>
+      <p>This document is organized broadly in three parts:</p>
+      <ul>
+        <li>
+          <a href="#concepts">🍎 Concepts</a>
+          <ul>
+            <li><a href="#environmental-parameters">☯️ Environmental parameters</a></li>
+            <li><a href="#growth-stages">🌱 Growth stages</a></li>
+            <li><a href="#light">☀️ Light</a></li>
+            <li><a href="#temperature">🌡 Temperature</a></li>
+            <li><a href="#nutrition">🧪 Nutrition</a></li>
+            <li><a href="#growing-media">🟤 Growing Media</a></li>
+            <li><a href="#water">💧 Water</a></li>
+            <li><a href="#pests-and-diseases">😷 Pests and diseases</a></li>
+          </ul>
+        </li>
+        <li><a href="#data">🔢 Data</a></li>
+        <li><a href="#techniques-and-resources">🛠 Techniques &amp; Resources</a></li>
+        <li><a href="#economics">💰 Economics</a></li>
+      </ul>
+      <p class="muted" style="margin-top: 0.85rem; margin-bottom: 0;">
+        The first part provides a conceptual understanding of the science of growing vegetables.
+        The second part features tables of data (“VegTable”) for many garden crops. It answers basic questions about crop selection.
+        The third part is a collection of links about well-known growing systems, techniques, and other resources.
+        Finally, the last part examines the economics of market gardening.
+      </p>
     </nav>
 
     <section id="concepts">
-      <h2>Understand the variables</h2>
-      <p>
-        Plant growth depends on interacting conditions. More fertilizer
-        cannot compensate for insufficient light, and more light is not
-        always better.
-      </p>
-      <div class="table-wrap">
-        <table>
-          <caption>Key growing conditions and measurements</caption>
-          <thead>
-            <tr>
-              <th scope="col">Variable</th>
-              <th scope="col">What to track</th>
-              <th scope="col">Why it matters</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Light</th>
-              <td>PPFD and daily light integral (DLI)</td>
-              <td>Provides energy for photosynthesis.</td>
-            </tr>
-            <tr>
-              <th scope="row">Temperature</th>
-              <td>Air and root-zone temperature</td>
-              <td>Affects growth rate and plant development.</td>
-            </tr>
-            <tr>
-              <th scope="row">Nutrition</th>
-              <td>Electrical conductivity (EC)</td>
-              <td>Indicates dissolved salt concentration, not nutrient balance.</td>
-            </tr>
-            <tr>
-              <th scope="row">pH</th>
-              <td>Acidity or alkalinity</td>
-              <td>Affects nutrient availability.</td>
-            </tr>
-            <tr>
-              <th scope="row">Root environment</th>
-              <td>Moisture, drainage, and oxygen</td>
-              <td>Roots need access to both water and oxygen.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+      <h2>🍎 Concepts</h2>
 
-    <section id="growth">
-      <h2>Follow the growth stages</h2>
-      <ol>
-        <li>Germination: the seed sprouts and the first root emerges.</li>
-        <li>Seedling: seed leaves expand and true leaves develop.</li>
-        <li>Vegetative growth: the plant builds leaves, stems, and roots.</li>
-        <li>Flowering and fruiting: relevant for fruit-producing crops.</li>
-        <li>Harvest: timing depends on the crop and what you want to eat.</li>
-      </ol>
-    </section>
+      <article id="environmental-parameters">
+        <h3>☯️ Environmental parameters</h3>
+        <p>
+          When growing plants, your task is to balance a number of highly interdependent factors, as listed below.
+          An insufficient amount of, say, light or nutrition creates a limiting factor in plant growth and development.
+          On the other hand, excessive light or fertilizer (i.e. beyond what a specific plant species can handle at a given metabolic rate)
+          can also result in problems (tip burn, photo-oxidative stress).
+        </p>
 
-    <section id="light">
-      <h2>Calculate daily light</h2>
-      <p>
-        PPFD measures the light reaching your plants at a particular
-        location. DLI adds up that light over a day.
-      </p>
-      <p>
-        For constant light:
-        <code>DLI = PPFD × hours × 0.0036</code>
-      </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Parameter</th>
+                <th scope="col">Measurement</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Zone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Light</td>
+                <td>Daily Light Integral (DLI)*</td>
+                <td>mol/m²/day</td>
+                <td>Light</td>
+              </tr>
+              <tr>
+                <td>Temperature</td>
+                <td>Air temperature*</td>
+                <td>°C</td>
+                <td>Air</td>
+              </tr>
+              <tr>
+                <td>Humidity</td>
+                <td>Relative Humidity (RH)</td>
+                <td>%</td>
+                <td>Air</td>
+              </tr>
+              <tr>
+                <td>Wind</td>
+                <td>Wind speed</td>
+                <td>m/s</td>
+                <td>Air</td>
+              </tr>
+              <tr>
+                <td>Carbon dioxide (CO₂)</td>
+                <td>Carbon dioxide</td>
+                <td>ppm</td>
+                <td>Air</td>
+              </tr>
+              <tr>
+                <td>Nutrients</td>
+                <td>Electrical Conductivity (EC)*</td>
+                <td>μS/cm</td>
+                <td>Soil/Water</td>
+              </tr>
+              <tr>
+                <td>pH</td>
+                <td>pH*</td>
+                <td>pH</td>
+                <td>Soil/Water</td>
+              </tr>
+              <tr>
+                <td>Temperature</td>
+                <td>Root-zone temperature</td>
+                <td>°C</td>
+                <td>Soil/Water</td>
+              </tr>
+              <tr>
+                <td>Oxygen (O₂)</td>
+                <td>Dissolved Oxygen (DO)</td>
+                <td>ppm</td>
+                <td>Soil/Water</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">* key measurements for small-scale systems</p>
 
-      <form id="dli-form">
-        <label for="ppfd">PPFD (µmol/m²/s)</label>
-        <input id="ppfd" name="ppfd" type="number"
-               min="0" step="any" value="250" required>
+        <p>Why are these relevant? Plants perform two critical processes which are complementary:</p>
+        <ul>
+          <li>
+            Plants convert light energy into storable chemical energy (carbohydrates) during <strong>photosynthesis</strong>.
+            In other words: ☀️ Light energy + 💨 Carbon dioxide + 💧 Water → 🔋 Stored energy + 💨 Oxygen
+          </li>
+          <li>
+            Plants use the stored energy (carbohydrates) to fuel growth, in a process called <strong>respiration</strong>.
+            In other words: 🔋 Stored energy + 💨 Oxygen → 💨 Carbon dioxide + 💧 Water
+          </li>
+        </ul>
 
-        <label for="hours">Hours of light per day</label>
-        <input id="hours" name="hours" type="number"
-               min="0" max="24" step="any" value="16" required>
+        <p>Light is the single most important environmental parameter as it literally provides energy for plant growth.</p>
+        <p>Temperature dictates a plant’s metabolic rate and therefore also strongly influences growth rate.</p>
+        <p>Additionally, there is another critical process:</p>
+        <ul>
+          <li>
+            The evaporation of water through a plant’s leaves pulls water (containing dissolved nutrients) up from the roots.
+            This is a passive process called <strong>transpiration</strong>.
+          </li>
+        </ul>
 
-        <button type="submit">Calculate DLI</button>
-        <output id="result" for="ppfd hours" aria-live="polite">
-          DLI: 14.40 mol/m²/day
-        </output>
-      </form>
+        <p>
+          Soil pH is sometimes called a “master variable” as it affects the solubility of soil nutrients
+          (among other things, including microbial activity) and therefore nutrient availability, hence plant growth.
+        </p>
+        <p>
+          Air humidity, wind, and temperature all affect the rate of transpiration and also therefore nutrient uptake and plant growth.
+          For this reason, poor ventilation actually can result in nutrient deficiencies.
+        </p>
+        <p>
+          On the other hand, excessive ventilation decreases relative humidity which, in combination with heating the cooler incoming air
+          (air holds more water at warmer temperatures), can increase transpiration, which decreases plant temperature and increases ambient humidity,
+          resulting in a vicious cycle. Alternatively, if transpiration occurs to the extent that there is not enough water in the plant
+          (e.g. during peak hours of the day), then stomata (microscopic openings on the undersides of leaves) will close, which increases leaf temperatures
+          and decreases CO₂ exchange… [<a href="https://www.greenhousecanada.com/empower-plants-through-balanced-climate-control-33115/">1</a>]
+        </p>
+        <p>
+          Humidity can be reduced in three ways: 1) heating (air holds more water at warmer temperatures), 2) ventilation (“out”), and 3) condensation (“in”).
+        </p>
 
-      <p><small>
-        This assumes constant PPFD throughout the lighting period.
-        Variable sunlight requires measurements over time.
-        Crop requirements differ; use the linked crop data as a reference.
-      </small></p>
-      <noscript>
-        <p>JavaScript is disabled. Use the formula above to calculate DLI.</p>
-      </noscript>
-    </section>
+        <h4>Environments</h4>
+        <ul>
+          <li>
+            In an <strong>indoor</strong> system, the environmental parameters are mostly controlled.
+            Limiting factors are likely 1) light, 2) space (area), 3) water, 4) nutrition, 5) oxygen (for soil-less systems and compact soils).
+          </li>
+          <li>
+            In an <strong>outdoor</strong> system, think about sun, wind, temperature, water access, soil conditions.
+            Look for planting calendars and first/last frost dates.
+          </li>
+        </ul>
 
-    <section id="systems">
-      <h2>Choose a growing system</h2>
-      <ul>
-        <li>
-          Container gardening: grow in pots using a medium chosen
-          for suitable moisture retention and aeration.
-        </li>
-        <li>
-          Kratky: a passive hydroponic method highlighted in the
-          original guide for small-scale leafy greens.
-        </li>
-        <li>
-          Nutrient film technique (NFT): a hydroponic option
-          discussed for larger-scale leafy-green production.
-        </li>
-        <li>
-          Bato buckets: a hydroponic option discussed for fruiting crops.
-        </li>
-      </ul>
-      <p>
-        Match your system to your available space, light,
-        crop choice, and maintenance time.
-      </p>
+        <h4>More about plant biology</h4>
+        <ul>
+          <li>Mary M. Pratt, <em>Practical Science for Gardeners</em>, 2005.</li>
+          <li>Khan Academy, <a href="https://www.khanacademy.org/science/biology/cellular-respiration-and-fermentation">“Cellular respiration”</a></li>
+          <li>Khan Academy, <a href="https://www.khanacademy.org/science/biology/photosynthesis-in-plants">“Photosynthesis”</a></li>
+          <li>[1] <a href="https://www.greenhousecanada.com/empower-plants-through-balanced-climate-control-33115/">Greenhouse Canada — Empower plants through balanced climate control</a></li>
+        </ul>
+      </article>
+
+      <article id="growth-stages">
+        <h3>🌱 Growth stages</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Stage</th>
+                <th scope="col">Description</th>
+                <th scope="col">Labor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Germination (Stage 1)</td>
+                <td>Sowing to radicle (root) emergence</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Germination (Stage 2)</td>
+                <td>“Sprout”: Radicle emergence to expansion of cotyledons (false leaves)</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Germination (Stage 3)</td>
+                <td>“Seedling”: Cotyledon expansion to vegetative growth</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Vegetative</td>
+                <td>Growth of all true leaves</td>
+                <td>Transplant</td>
+              </tr>
+              <tr>
+                <td>Flowering</td>
+                <td>From first flowering to first fruit set</td>
+                <td>Pollinate*</td>
+              </tr>
+              <tr>
+                <td>Fruiting*</td>
+                <td>From first fruit set to growth, ripening, and first harvest</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Maturity</td>
+                <td>From first harvest to the end of last harvest</td>
+                <td>Harvest</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">* fruiting crops only</p>
+
+        <p>A general rule of thumb is to plant seeds twice as deep as they are large.</p>
+
+        <h4>More about plant growth</h4>
+        <ul>
+          <li>Mary M. Pratt, <em>Practical Science for Gardeners</em>, 2005.</li>
+          <li>
+            “Chapter 10: Growth, Development, Transpiration, and Translocation as Affected by Abiotic Environmental Factors”,
+            <em>Plant Factory: An Indoor Vertical Farming System for Efficient Quality Food</em>, edited by Toyoki Kozai, Genhua Niu, Michiko Takagaki.
+          </li>
+        </ul>
+      </article>
+
+      <article id="light">
+        <h3>☀️ Light</h3>
+
+        <h4>Light Quality</h4>
+        <figure>
+          <img src="images/par.png" alt="Photosynthetically Active Radiation (PAR) spectrum from 400 to 700 nm">
+          <figcaption>
+            Photosynthetically Active Radiation (PAR) spectrum. Based on
+            <a href="https://en.wikipedia.org/wiki/File:EM_spectrumrevised.png">EM_spectrumrevised.png (Wikipedia)</a>.
+          </figcaption>
+        </figure>
+
+        <p>
+          Light quality refers to the distribution of wavelengths (colors) in a light.
+          The part of the light spectrum most relevant to photosynthesis is 400–700 nm.
+          This range is named Photosynthetically Active Radiation (PAR).
+        </p>
+        <p>
+          Simplistically speaking, blue light is needed to produce healthy stems and leaves.
+          Red light is needed for flowering and fruiting, as well as seed germination, root growth, and seed production.
+        </p>
+        <p>
+          Historically it was believed that plants only used PAR light. It is now understood that far-red and ultraviolet light,
+          which are both outside PAR, can affect plant development. Specifically, far-red (FR) light, which penetrates leaves,
+          can tell plants that they are under a canopy and promote growth, whereas blue-violet and ultraviolet light,
+          which are abundant in the sky, can inhibit growth.
+        </p>
+
+        <div class="callout">
+          <p><strong>Shopping advice:</strong></p>
+          <ul>
+            <li>Color temperature, measured in Kelvin (K), is only relevant to humans, not plants.</li>
+            <li>
+              Buy a full-spectrum light, not a red-blue (“blurple”) light. Although there is research on the effects of changing light quality
+              during growth, in general it is sufficient to use the same constant full-spectrum light from start to finish.
+            </li>
+          </ul>
+        </div>
+
+        <h4>Light Quantity</h4>
+        <figure>
+          <img src="images/light-points.png" alt="Photosynthesis-Irradiance (PI) curve showing light compensation point and light saturation point">
+          <figcaption>
+            Photosynthesis-Irradiance curve showing the light compensation point and light saturation point.
+            Based on <a href="https://en.wikipedia.org/wiki/PI_curve">PI curve (Wikipedia)</a>.
+          </figcaption>
+        </figure>
+
+        <p>
+          The rate of plant growth scales to light quantity (intensity). However, below a certain quantity (the light compensation point),
+          there is not enough energy to fuel growth. On the other side, above a certain quantity (the light saturation point),
+          plants become damaged. Tolerance levels vary from crop to crop (see the <a href="#data">Data</a> section).
+        </p>
+        <p>Light quantity is measured in various ways, with a key metric being Daily Light Integral (DLI).</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Measurement</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Photosynthetic Photon Flux (PPF)</td>
+                <td>μmol/s</td>
+                <td>The amount of PAR (400–700 nm light) emitted from a source per second.</td>
+              </tr>
+              <tr>
+                <td>Photosynthetic Photon Flux Density (PPFD)</td>
+                <td>μmol/m²/s</td>
+                <td>The amount of PAR that reaches a destination per second.</td>
+              </tr>
+              <tr>
+                <td>Daily Light Integral (DLI)</td>
+                <td>mol/m²/day</td>
+                <td>The amount of PAR that cumulatively reaches a destination in one day.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>PPFD and DLI are spot measurements. They are always relative to a specific distance from the light source.</p>
+        <p>
+          To calculate DLI, multiply <code>PPFD × hours of light per day (“photoperiod”) × 1/1000000 mol/μmol × 3600 sec/hour</code>.
+        </p>
+
+        <form id="dli-form" class="dli-calc">
+          <h4>DLI Calculator</h4>
+          <div class="dli-fields">
+            <label for="ppfd">
+              PPFD (µmol/m²/s)
+              <input id="ppfd" name="ppfd" type="number" min="0" step="any" value="250" required>
+            </label>
+            <label for="hours">
+              Photoperiod (hours/day)
+              <input id="hours" name="hours" type="number" min="0" max="24" step="any" value="16" required>
+            </label>
+            <button type="submit">Calculate</button>
+          </div>
+          <output id="result" for="ppfd hours" aria-live="polite">DLI: 14.40 mol/m²/day</output>
+        </form>
+
+        <div class="callout">
+          <p><strong>Shopping advice:</strong></p>
+          <ul>
+            <li>Lumens, lux, and foot-candles are only relevant to humans, not plants.</li>
+            <li>
+              Ask for PPFD maps, which show PPFD measurements at various points across a surface for a given lamp height.
+              As an example, the IKEA VÄXER E27 10W grow bulb is capable of producing &gt;250 PPFD over a 6.5 cm radius area at 30 cm height.
+              If you run it for 16 hours/day, the DLI is 14.4 mol/m²/day (see above calculation).
+              This is sufficient for lettuce, which requires 14–17 DLI, but not tomatoes, which require 22–30 DLI.
+            </li>
+            <li>Plant DLI requirements are for total light, including sunlight, so you may be able to provide less supplemental light.</li>
+            <li>
+              A quantum meter is used to measure PPFD. Apps such as Korona (iOS) can be used as low-cost alternatives.
+              See also MIGRO, <a href="https://www.youtube.com/watch?v=AjkEJjlzGv8">“Android Smartphone PAR meter hack”</a>, September 25, 2019.
+            </li>
+          </ul>
+        </div>
+
+        <h4>Photoperiodism</h4>
+        <p>
+          Photoperiodism refers to how the light cycle affects plant growth and flowering.
+          Short-day plants (e.g. lettuce) only flower when days are shorter than a certain length,
+          long-day plants (e.g. mung beans) only flower when days are longer than a certain length,
+          and day-neutral plants (e.g. tomatoes) flower based on other conditions.
+        </p>
+
+        <h4>More about plant lighting</h4>
+        <ul>
+          <li>
+            “Chapter 7: Light”, <em>Plant Factory: An Indoor Vertical Farming System for Efficient Quality Food</em>,
+            edited by Toyoki Kozai, Genhua Niu, Michiko Takagaki.
+          </li>
+          <li>AlboPepper, <a href="https://www.youtube.com/watch?v=O3dxjk_E2Ac">“PAR Light Quality LEDs &amp; HID: Plant Grow Light Basics -101 (pt 1)”</a>, August 17, 2017.</li>
+          <li>Bruce Bugbee, <a href="https://www.youtube.com/watch?v=UZO8Fb0ryW8">“PAR, PPF, PPFD, and PFD Explained”</a>, June 27, 2019.</li>
+          <li>Bruce Bugbee, <a href="https://www.youtube.com/watch?v=ID9rE5JewVg">“Cannabis Grow Lighting Myths and FAQs with Dr. Bruce Bugbee”</a>, Jan 9, 2020.</li>
+          <li>Ledtonic, <a href="https://www.ledtonic.com/blogs/guides/dli-daily-light-integral-chart-understand-your-plants-ppfd-photoperiod-requirements">“DLI (Daily Light Integral) Chart - Understand your plants’ PPFD &amp; photoperiod requirements”</a>, May 28, 2019.</li>
+          <li>Fluence By OSRAM, <a href="https://fluence.science/science-articles/">Science Articles</a></li>
+          <li>Khan Academy, <a href="https://www.khanacademy.org/science/biology/plant-biology#plant-responses-to-light-cues">“Plant responses to light”</a></li>
+          <li>The Urban Vertical Farming Project, <a href="https://urbanverticalfarmingproject.com/2017/06/13/led-light-buying-guide-for-vertical-farming/">“LEDs For Vertical Farming: Buying Guide For Lights”</a>, June 13, 2017.</li>
+        </ul>
+      </article>
+
+      <article id="temperature">
+        <h3>🌡 Temperature</h3>
+        <p>
+          Every plant has a base (minimum) temperature (<em>T<sub>base</sub></em>), an optimal temperature (<em>T<sub>opt</sub></em>),
+          and a maximum temperature (<em>T<sub>max</sub></em>). These temperature ranges can vary across growth stages.
+        </p>
+
+        <figure>
+          <img src="images/temp.png" alt="Plant growth rate versus temperature showing base, optimal, and maximum temperatures">
+          <figcaption>Plant growth rate as a function of temperature (T<sub>base</sub>, T<sub>opt</sub>, T<sub>max</sub>).</figcaption>
+        </figure>
+
+        <p>
+          Crucially, there is a tradeoff between growth rate and growth quality. Higher temperatures can result in faster growth
+          but also thinner stems, weaker roots, and less flavor. Furthermore, gases become less soluble at higher temperatures,
+          increasing the risk of oxygen deficiency.
+        </p>
+
+        <p>Key air temperature measurements are as follows:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Measurement</th>
+                <th scope="col">Unit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Average daily temperature (ADT)</td>
+                <td>°C</td>
+              </tr>
+              <tr>
+                <td>Difference between day and night temperature (DIF)</td>
+                <td>°C</td>
+              </tr>
+              <tr>
+                <td>Growing degree days (GDD)</td>
+                <td>°C-day</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Higher DIF can result in taller plants with weaker stems (stem elongation).</p>
+        <p>Unlike air temperatures, root-zone temperatures need to be relatively stable.</p>
+
+        <p>Plants can be grouped according to their tolerance for cold temperatures:</p>
+        <ul>
+          <li>cool season (“cold-tolerant”)</li>
+          <li>intermediate (“cold-temperate”)</li>
+          <li>warm season (“cold-sensitive”)</li>
+        </ul>
+
+        <h4>More about plant temperature</h4>
+        <ul>
+          <li>
+            “Chapter 8: Physical Environmental Factors and Their Properties”,
+            <em>Plant Factory: An Indoor Vertical Farming System for Efficient Quality Food</em>,
+            edited by Toyoki Kozai, Genhua Niu, Michiko Takagaki.
+          </li>
+          <li>Christopher Currey, <a href="https://www.producegrower.com/article/hydroponic-production-primer-temperature/">“Find your just-right temperature”</a>, Oct 3, 2016.</li>
+          <li>Roberto Lopez, <a href="http://www.e-gro.org/pdf/206.pdf">“Effects of Temperature on Greenhouse Crops”</a>, Purdue University.</li>
+        </ul>
+      </article>
+
+      <article id="nutrition">
+        <h3>🧪 Nutrition</h3>
+        <p>Plants require 17 essential nutrients (“minerals”) for survival.</p>
+        <p>Of these, plants obtain carbon (C), hydrogen (H), and oxygen (O) freely from air (CO₂ and O₂) and water (H₂O).</p>
+        <p>
+          The remaining nutrients are obtained from the soil (or alternative growing media) in the form of salts.
+          This happens through multiple processes: by the root physically growing in contact with the nutrients (“root interception”),
+          by dissolved nutrients flowing through the soil solution to the root (“mass flow”), and by dissolved nutrients diffusing through
+          the soil solution to the depleted soil next to the plant root (“diffusion”).
+        </p>
+        <p>
+          Nitrogen (N), phosphorus (P), and potassium (K) are required in the largest amounts; commercial fertilizers are labeled with N-P-K ratios.
+          Although nitrogen is abundant in the atmosphere (N₂), it is only available to plants in the form of ammonium (NH₄⁺, which has an acidic effect),
+          nitrate (NO₃⁻, which has a basic effect), and urea.
+        </p>
+        <p>
+          Nitrogen is a key ingredient in many plant substances, including chlorophyll. It is used by leafy green crops (like lettuce)
+          and more in the vegetative growth phase of fruiting crops. Phosphorus and especially potassium are more important for fruiting crops
+          (such as tomatoes), as evidenced in the following diagram showing the macronutrient uptake across time for a tomato plant:
+        </p>
+
+        <figure>
+          <img src="images/npk-stages.png" alt="Macronutrient (N, P, K) uptake across growth stages for a tomato plant">
+          <figcaption>
+            Macronutrient uptake across growth stages for a tomato plant. Based on
+            <a href="https://www.haifa-group.com/crop-guide/vegetables/tomato/crop-guide-tomato-plant-nutrition">Haifa Group Tomato Crop Guide</a>.
+          </figcaption>
+        </figure>
+
+        <h4>Electrical Conductivity (EC)</h4>
+        <p>
+          An EC meter measures electrical conductivity, which is an indicator of the amount of dissolved nutrients (mineral salts) in a solution.
+        </p>
+        <p><strong>Notes:</strong></p>
+        <ul>
+          <li>EC cannot be used to determine the amounts or ratios of specific nutrients.</li>
+          <li>
+            A Total Dissolved Solids (TDS) meter measures the amount of all kinds of dissolved solids (inorganic as well as organic) in a solution.
+            Essentially it is an EC meter which performs an output conversion to TDS, measured in ppm. Be aware that the conversion factor varies
+            across reference materials and nutrient suppliers in different applications and countries. For measuring hydroponic nutrients,
+            the best approach is to use only EC, not TDS.
+          </li>
+        </ul>
+
+        <h4>pH</h4>
+        <figure>
+          <img src="images/ph.jpg" alt="Truog 1947 chart showing soil pH and nutrient availability">
+          <figcaption>
+            Soil pH and nutrient availability. Source:
+            <a href="https://commons.wikimedia.org/wiki/File:Truog_1947_pH_and_nutrient_availability.jpg">Truog (1947), Wikimedia Commons</a>.
+          </figcaption>
+        </figure>
+
+        <p>
+          pH is the measure of acidity or alkalinity (basicity) of a solution, where acidic refers to having a high concentration of hydrogen ions (H⁺).
+        </p>
+        <p>Soil pH is highly important as it affects the bioavailability of nutrients to plants.</p>
+
+        <div class="callout">
+          <p><strong>Shopping advice:</strong></p>
+          <ul>
+            <li>An entry-level EC meter (e.g. HM Digital EC-3) costs 20–30 USD.</li>
+            <li>
+              An entry-level pH meter (e.g. Apera Instruments PH20) costs 50–60 USD; a professional-level pH meter (e.g. Bluelab pH Pen) costs over 100 USD.
+              You also need to buy liquid products for cleaning, storing (pH probes must be stored in a buffer solution), and calibrating the highly sensitive pH probe.
+              These may be sold together as a kit. Be sure to get a pH meter with a replaceable probe. Even if unused, the pH electrode has a lifespan of only 6–18 months.
+            </li>
+            <li>As an alternative to buying a pH meter, start with pH indicator drops, litmus paper, or even homemade red cabbage juice.</li>
+            <li>
+              Reputable instrument manufacturers include Apera Instruments (US), Bluelab (NZ), Hanna Instruments (IT),
+              HM Digital (KR), Milwaukee Instruments (US), and Oakton Instruments (US).
+            </li>
+          </ul>
+        </div>
+
+        <h4>More about plant nutrition</h4>
+        <ul>
+          <li>UC Nursery and Floriculture Alliance, <a href="https://www.youtube.com/playlist?list=PLGfKOdq24vnL-XPpMQGhfMdHbKOlb-BnO">“English” playlist</a></li>
+          <li>Jeff Lowenfels, <em>Teaming with Nutrients: The Organic Gardener’s Guide to Optimizing Plant Nutrition</em>, 2013.</li>
+          <li>Mary M. Pratt, <em>Practical Science for Gardeners</em>, 2005.</li>
+          <li>Sonneveld and Voogt, <em>Plant Nutrition for Greenhouse Crops</em>.</li>
+          <li>
+            “Chapter 11: Nutrition and Nutrient Uptake in Soilless Culture”,
+            <em>Plant Factory: An Indoor Vertical Farming System for Efficient Quality Food</em>,
+            edited by Toyoki Kozai, Genhua Niu, Michiko Takagaki.
+          </li>
+          <li>Khan Academy, <a href="https://www.khanacademy.org/science/biology/water-acids-and-bases">“Acids, bases, and pH”</a></li>
+          <li>Khan Academy, <a href="https://www.khanacademy.org/science/biology/ecology#biogeochemical-cycles">“Biogeochemical cycles”</a></li>
+          <li>NM State University, <a href="https://scienceofagriculture.org/ch-cation.php">“Science of Agriculture: Cation Exchange”</a></li>
+        </ul>
+      </article>
+
+      <article id="growing-media">
+        <h3>🟤 Growing Media</h3>
+        <p>Soil is best understood from three perspectives simultaneously:</p>
+        <p>
+          <strong>Physically:</strong> Soil is a mixture of solids, liquids, and gases: typically 50% water, dissolved minerals,
+          and various gases held in pores, 45% inorganic particles (sand, silt, and clay), and 5% organic matter (“soil organic matter”).
+          Soil texture is determined by the exact proportion of sand (most coarse), silt, and clay (most fine) particles.
+        </p>
+        <p>
+          Porosity refers to the percentage of pores (microscopic spaces) in the growing medium which can contain water or air.
+          Different media have different water-holding capacity. For example, coarse-grained media (such as foam) has a low water-holding capacity
+          (i.e. holds onto water weakly), medium-grained media (such as rockwool) has a medium water-holding capacity, and fine-grained media
+          (such as peat) has a high water-holding capacity (i.e. holds onto water strongly). Water-holding capacity and air porosity should be chosen
+          to be appropriate for the crop and container size.
+        </p>
+        <p>
+          <strong>Chemically:</strong> Soil is effectively an aqueous solution containing dissolved minerals (nutrients) along with organic and inorganic particles.
+          The particles commonly have negative charges, which attract nutrients with positive charges (cations). This allows the soil to hold and release
+          certain nutrients. The holding capacity of a soil is called the cation-exchange capacity (CEC).
+        </p>
+        <p>
+          <strong>Biologically:</strong> Soil is an ecosystem of microbes, including bacteria and mycorrhizal fungi.
+          See Jeff Lowenfels, <em>Teaming with Microbes: The Organic Gardener’s Guide to The Soil Food Web</em> and
+          <em>Teaming With Fungi: The Organic Grower’s Guide to Mycorrhizae</em>.
+        </p>
+      </article>
+
+      <article id="water">
+        <h3>💧 Water</h3>
+        <p class="muted">TBD</p>
+      </article>
+
+      <article id="pests-and-diseases">
+        <h3>😷 Pests and diseases</h3>
+        <p class="muted">TBD</p>
+        <p>Key here is to take an ecological (ecosystems) perspective.</p>
+      </article>
     </section>
 
     <section id="data">
-      <h2>Crop data and further reading</h2>
+      <h2>🔢 Data</h2>
       <p>
-        Compare crops before choosing what to grow. Size and maturity
-        figures are approximate: variety, climate, and growing method
-        can change the results.
+        See overview table at
+        <a href="https://github.com/CollapseLabs/gardening-for-engineers/blob/master/crops/dist/_crops.csv">_crops.csv</a>
+        and individual pages at
+        <a href="https://github.com/CollapseLabs/gardening-for-engineers/tree/master/crops/dist">crops/dist</a>.
       </p>
+      <p>
+        The size and maturity values provided are for comparison purposes only. Actual values will vary considerably depending on
+        seed variety, climate and other environmental factors, and growing technique.
+      </p>
+    </section>
+
+    <section id="techniques-and-resources">
+      <h2>🛠 Techniques &amp; Resources</h2>
+      <p>
+        <strong>Vertical farming</strong> refers to indoor farming in an urban context, scaling vertically, based on an early concept of farming
+        in New York City skyscrapers. It implies the use of artificial lighting, either as a supplement or a replacement for sunlight.
+        A vertical farm is also known by the Japanese term Plant Factory with Artificial Lighting (PFAL). Vertical farming may or may not involve
+        vertical-plane growing (i.e. growing vertically in towers, as opposed to growing horizontally in racks).
+      </p>
+      <p>
+        <strong>Controlled-environment agriculture (CEA)</strong> refers to growing in a climate-controlled environment,
+        typically a greenhouse but can also be completely indoors.
+      </p>
+
+      <h3>Hydroponics</h3>
+      <p><strong>Techniques:</strong></p>
       <ul>
-        <li>
-          <a href="https://github.com/CollapseLabs/gardening-for-engineers/blob/master/crops/dist/_crops.csv">
-            Crop comparison data
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/CollapseLabs/gardening-for-engineers/tree/master/crops/dist">
-            Individual crop references
-          </a>
-        </li>
-        <li>
-          <a href="https://jrcpl.us/contrib/2020/gardening-for-engineers/">
-            Read the complete original guide
-          </a>
-        </li>
+        <li>Kratky (passive) — best for leafy greens at small-scale</li>
+        <li>NFT — best for leafy greens at large-scale</li>
+        <li>Bato Bucket — best for fruiting crops at small- to medium-scale</li>
+        <li>DWC/Raft — best for aquaponics</li>
+      </ul>
+
+      <p><strong>More about hydroponics:</strong></p>
+      <ul>
+        <li><a href="https://hortamericas.com/grower-resources/">https://hortamericas.com/grower-resources/</a></li>
+        <li><a href="https://generalhydroponics.com/knowledgebase">https://generalhydroponics.com/knowledgebase</a></li>
+        <li><a href="http://howardresh.com/">http://howardresh.com/</a></li>
+        <li><a href="https://blogs.cornell.edu/cornellcea/">https://blogs.cornell.edu/cornellcea/</a></li>
+        <li><a href="https://blogs.cornell.edu/cornellcea/files/2020/05/Guide-To-Home-Hydroponics-For-Leafy-Greens.pdf">Cornell CEA — Guide To Home Hydroponics For Leafy Greens (PDF)</a></li>
+        <li><a href="https://ceac.arizona.edu/resources/intro-hydroponics-cea">https://ceac.arizona.edu/resources/intro-hydroponics-cea</a></li>
+        <li><em>Hydroponic Food Production: A Definitive Guidebook for the Advanced Home Gardener and the Commercial Hydroponic Grower</em>, Howard M. Resh</li>
+        <li><em>Plant Factory: An Indoor Vertical Farming System for Efficient Quality Food</em>, edited by Toyoki Kozai, Genhua Niu, Michiko Takagaki</li>
+        <li><em>Plant Empowerment: The Basic Principles</em> by Peter Geelen, Peter van Weel and Jan Voogt</li>
+        <li><a href="https://scienceinhydroponics.com/">https://scienceinhydroponics.com/</a></li>
+        <li><a href="https://www.youtube.com/user/TheFarmerTyler">https://www.youtube.com/user/TheFarmerTyler</a></li>
+      </ul>
+
+      <p><strong>Online courses:</strong></p>
+      <ul>
+        <li>Upstart University — paid, focused on commercial hydroponic or aquaponic production</li>
+      </ul>
+
+      <p><strong>Automation:</strong></p>
+      <ul>
+        <li>DFRobot: Build KnowFlow: automatic water monitor, How to Make An Automatic Water Changing System</li>
+      </ul>
+
+      <h3>Greenhouse growing</h3>
+      <ul>
+        <li>Greenhouse simulation models: <a href="https://gpe.letsgrow.com/">https://gpe.letsgrow.com/</a></li>
+        <li><a href="http://www.e-gro.org/">http://www.e-gro.org/</a></li>
+        <li><a href="https://www.backpocketgrower.org/">https://www.backpocketgrower.org/</a></li>
+      </ul>
+
+      <h3>Container gardening</h3>
+      <ul>
+        <li>Seed starter soil vs planting soil</li>
+        <li>Fungus gnats: <a href="https://ucanr.edu/blogs/blogcore/postdetail.cfm?postnum=25318">UC ANR — Fungus Gnats</a></li>
+      </ul>
+      <p><strong>Automation:</strong></p>
+      <ul>
+        <li>Xiaomi Flower Care (MiFlora) sensors: <a href="https://github.com/vrachieru/xiaomi-flower-care-api">xiaomi-flower-care-api</a></li>
+        <li>DFRobot: EcoDuino — An Auto Planting Kit</li>
+      </ul>
+
+      <h3>Backyard/allotment gardening</h3>
+      <p><strong>Methodologies:</strong></p>
+      <ul>
+        <li><em>Square Foot Gardening</em> by Mel Bartholomew</li>
+        <li><em>GROW BIOINTENSIVE Sustainable Mini-Farming</em> by John Jeavons and Ecology Action</li>
+        <li><em>SPIN Gardening</em> by Wally Satzewich, Gail Vandersteen, Roxanne Christensen</li>
+      </ul>
+      <p><strong>Techniques:</strong></p>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/H%C3%BCgelkultur">Hügelkultur (Wikipedia)</a></li>
+      </ul>
+
+      <h3>General gardening/urban ag courses</h3>
+      <ul>
+        <li>The Market Gardener (Canada) — paid</li>
+        <li><a href="https://design.agritecture.com/learn/">https://design.agritecture.com/learn/</a></li>
+        <li>GIY (Grow It Yourself) (Ireland) — free 12 week course</li>
+        <li>Vegetable Academy (Canada) — free/paid</li>
+        <li><a href="https://www.purdue.edu/dffs/urbanag/programs/urban-ag-certificate/">Purdue Urban Ag Certificate</a> — paid</li>
+        <li><a href="https://hort.ifas.ufl.edu/training/">UF/IFAS Greenhouse Training</a> — paid</li>
+        <li><a href="http://www.canr.msu.edu/online-college-of-knowledge/">MSU Online College of Knowledge</a> — paid</li>
+      </ul>
+
+      <h3>Companion planting</h3>
+      <ul>
+        <li><em>Carrots Love Tomatoes: Secrets of Companion Planting for Successful Gardening</em></li>
+        <li><em>Rodale’s Successful Organic Gardening: Companion Planting</em></li>
+      </ul>
+
+      <h3>Urban agriculture &amp; market gardening resources</h3>
+      <ul>
+        <li><a href="https://urbanagnews.com/">https://urbanagnews.com/</a></li>
+        <li><a href="https://www.agritecture.com/blog/">https://www.agritecture.com/blog/</a></li>
+        <li><a href="https://urbanverticalfarmingproject.com/">https://urbanverticalfarmingproject.com/</a></li>
+        <li><a href="https://www.facebook.com/groups/134018140298600/">Facebook Group</a></li>
+      </ul>
+
+      <h3>TBD</h3>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Reduction_potential">Reduction potential (Wikipedia)</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Hard_water#Measurement">Hard water — Measurement (Wikipedia)</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Leaf_area_index">Leaf area index (Wikipedia)</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Vapour-pressure_deficit">Vapour-pressure deficit (Wikipedia)</a></li>
+      </ul>
+    </section>
+
+    <section id="economics">
+      <h2>💰 Economics</h2>
+      <p>For a typical hydroponic greenhouse (source: ZipGrow):</p>
+      <ul>
+        <li>Labor: 60% of total costs (of that, about 60% is harvest/packing)</li>
+        <li>Energy: 10–15% of total costs (for lighting and heating/cooling)</li>
+        <li>Packaging and Marketing: 8% of total costs</li>
+        <li>Supplies: 7% of total costs</li>
+        <li>Water: 5% of total costs</li>
+        <li>Miscellaneous: 3% of total costs</li>
+        <li>Insurance: 2% of total costs</li>
+      </ul>
+      <p><strong>See also:</strong></p>
+      <ul>
+        <li><a href="https://jordbruksverket.se/v%C3%A4xthuskalkyler">Jordbruksverket — Växthuskalkyler (Sweden)</a></li>
       </ul>
     </section>
   </main>
 
   <footer>
-    <p>
-      Adapted and summarized from
-      <a href="https://jrcpl.us/contrib/2020/gardening-for-engineers/">
-        Vegetable Gardening for Engineers
-      </a>
-      by John Chang (jrc+). This is an independent summary,
-      not the original publication.
-    </p>
+    <p>Vegetable Gardening for Engineers</p>
   </footer>
 
   <script>
