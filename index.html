@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+        content="A concise guide to vegetable gardening for engineers.">
+  <title>Vegetable Gardening for Engineers</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f8f3;
+      --surface: #fff;
+      --text: #243127;
+      --muted: #58675c;
+      --accent: #27633e;
+      --border: #dce3d8;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 17px/1.7 system-ui, sans-serif;
+    }
+
+    main, footer {
+      width: min(100% - 2.5rem, 850px);
+      margin: auto;
+    }
+
+    header {
+      padding: 4rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { font-size: clamp(2rem, 6vw, 3.5rem); margin: .5rem 0 1rem; }
+    h2 { margin-top: 0; }
+    a { color: var(--accent); text-underline-offset: .2em; }
+    a:hover { text-decoration-thickness: 2px; }
+    .muted, small { color: var(--muted); }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem 1.2rem;
+      padding: 1.5rem 0;
+    }
+
+    section {
+      margin: 1rem 0 1.5rem;
+      padding: 1.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    li + li { margin-top: .45rem; }
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: .95rem;
+    }
+
+    th, td {
+      padding: .75rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    label { display: block; margin-top: 1rem; }
+    input, button {
+      font: inherit;
+      padding: .65rem .8rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    input {
+      width: 100%;
+      max-width: 320px;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    button {
+      display: block;
+      margin-top: 1rem;
+      background: var(--accent);
+      color: var(--surface);
+      cursor: pointer;
+    }
+
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    output { display: block; margin-top: 1rem; font-weight: 650; }
+    footer { padding: 1rem 0 3rem; font-size: .9rem; }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #151c17;
+        --surface: #1d2820;
+        --text: #e5eee6;
+        --muted: #b0c0b2;
+        --accent: #99d5a9;
+        --border: #36483b;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    @media (max-width: 500px) {
+      section { padding: 1.2rem; }
+      th, td { padding: .6rem .4rem; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="muted">A practical growing reference</p>
+      <h1>Vegetable Gardening for Engineers</h1>
+      <p>
+        Think of your garden as a system: understand the inputs,
+        measure the constraints, and improve one variable at a time.
+      </p>
+      <p class="muted">
+        A condensed adaptation of
+        <a href="https://jrcpl.us/contrib/2020/gardening-for-engineers/">
+          John Chang’s original guide
+        </a>,
+        focused on containers and hydroponics.
+      </p>
+    </header>
+
+    <nav aria-label="Contents">
+      <a href="#concepts">Concepts</a>
+      <a href="#growth">Growth stages</a>
+      <a href="#light">Light calculator</a>
+      <a href="#systems">Growing systems</a>
+      <a href="#data">Crop data</a>
+    </nav>
+
+    <section id="concepts">
+      <h2>Understand the variables</h2>
+      <p>
+        Plant growth depends on interacting conditions. More fertilizer
+        cannot compensate for insufficient light, and more light is not
+        always better.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Key growing conditions and measurements</caption>
+          <thead>
+            <tr>
+              <th scope="col">Variable</th>
+              <th scope="col">What to track</th>
+              <th scope="col">Why it matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Light</th>
+              <td>PPFD and daily light integral (DLI)</td>
+              <td>Provides energy for photosynthesis.</td>
+            </tr>
+            <tr>
+              <th scope="row">Temperature</th>
+              <td>Air and root-zone temperature</td>
+              <td>Affects growth rate and plant development.</td>
+            </tr>
+            <tr>
+              <th scope="row">Nutrition</th>
+              <td>Electrical conductivity (EC)</td>
+              <td>Indicates dissolved salt concentration, not nutrient balance.</td>
+            </tr>
+            <tr>
+              <th scope="row">pH</th>
+              <td>Acidity or alkalinity</td>
+              <td>Affects nutrient availability.</td>
+            </tr>
+            <tr>
+              <th scope="row">Root environment</th>
+              <td>Moisture, drainage, and oxygen</td>
+              <td>Roots need access to both water and oxygen.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="growth">
+      <h2>Follow the growth stages</h2>
+      <ol>
+        <li>Germination: the seed sprouts and the first root emerges.</li>
+        <li>Seedling: seed leaves expand and true leaves develop.</li>
+        <li>Vegetative growth: the plant builds leaves, stems, and roots.</li>
+        <li>Flowering and fruiting: relevant for fruit-producing crops.</li>
+        <li>Harvest: timing depends on the crop and what you want to eat.</li>
+      </ol>
+    </section>
+
+    <section id="light">
+      <h2>Calculate daily light</h2>
+      <p>
+        PPFD measures the light reaching your plants at a particular
+        location. DLI adds up that light over a day.
+      </p>
+      <p>
+        For constant light:
+        <code>DLI = PPFD × hours × 0.0036</code>
+      </p>
+
+      <form id="dli-form">
+        <label for="ppfd">PPFD (µmol/m²/s)</label>
+        <input id="ppfd" name="ppfd" type="number"
+               min="0" step="any" value="250" required>
+
+        <label for="hours">Hours of light per day</label>
+        <input id="hours" name="hours" type="number"
+               min="0" max="24" step="any" value="16" required>
+
+        <button type="submit">Calculate DLI</button>
+        <output id="result" for="ppfd hours" aria-live="polite">
+          DLI: 14.40 mol/m²/day
+        </output>
+      </form>
+
+      <p><small>
+        This assumes constant PPFD throughout the lighting period.
+        Variable sunlight requires measurements over time.
+        Crop requirements differ; use the linked crop data as a reference.
+      </small></p>
+      <noscript>
+        <p>JavaScript is disabled. Use the formula above to calculate DLI.</p>
+      </noscript>
+    </section>
+
+    <section id="systems">
+      <h2>Choose a growing system</h2>
+      <ul>
+        <li>
+          Container gardening: grow in pots using a medium chosen
+          for suitable moisture retention and aeration.
+        </li>
+        <li>
+          Kratky: a passive hydroponic method highlighted in the
+          original guide for small-scale leafy greens.
+        </li>
+        <li>
+          Nutrient film technique (NFT): a hydroponic option
+          discussed for larger-scale leafy-green production.
+        </li>
+        <li>
+          Bato buckets: a hydroponic option discussed for fruiting crops.
+        </li>
+      </ul>
+      <p>
+        Match your system to your available space, light,
+        crop choice, and maintenance time.
+      </p>
+    </section>
+
+    <section id="data">
+      <h2>Crop data and further reading</h2>
+      <p>
+        Compare crops before choosing what to grow. Size and maturity
+        figures are approximate: variety, climate, and growing method
+        can change the results.
+      </p>
+      <ul>
+        <li>
+          <a href="https://github.com/CollapseLabs/gardening-for-engineers/blob/master/crops/dist/_crops.csv">
+            Crop comparison data
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/CollapseLabs/gardening-for-engineers/tree/master/crops/dist">
+            Individual crop references
+          </a>
+        </li>
+        <li>
+          <a href="https://jrcpl.us/contrib/2020/gardening-for-engineers/">
+            Read the complete original guide
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Adapted and summarized from
+      <a href="https://jrcpl.us/contrib/2020/gardening-for-engineers/">
+        Vegetable Gardening for Engineers
+      </a>
+      by John Chang (jrc+). This is an independent summary,
+      not the original publication.
+    </p>
+  </footer>
+
+  <script>
+    const form = document.getElementById("dli-form");
+    const result = document.getElementById("result");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const ppfd = document.getElementById("ppfd").valueAsNumber;
+      const hours = document.getElementById("hours").valueAsNumber;
+      const dli = ppfd * hours * 0.0036;
+
+      result.textContent = `DLI: ${dli.toFixed(2)} mol/m²/day`;
+    });
+  </script>
+</body>
+</html>
